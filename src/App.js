@@ -14,6 +14,7 @@ function App() {
             return [...contactList, filteredCelebs[randomNum]];
         });
     };
+
     const sortByName = () => {
         setContacts((contactList) => {
             contactList.sort((a, b) =>
@@ -22,12 +23,21 @@ function App() {
             return [...contactList];
         });
     };
+
     const sortByPopularity = () => {
         setContacts((contactList) => {
             contactList.sort((a, b) => a.popularity - b.popularity);
             return [...contactList];
         });
     };
+
+    function deleteContact(id) {
+        return () =>
+            setContacts((contactList) => {
+                const copy = contactList.filter((celeb) => celeb.id !== id);
+                return copy;
+            });
+    }
     return (
         <div className="App">
             <h1>IronContacts</h1>
@@ -44,6 +54,7 @@ function App() {
                         <th>Popularity</th>
                         <th>Oscar</th>
                         <th>Emmy</th>
+                        <th>Actions</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -54,8 +65,13 @@ function App() {
                             </td>
                             <td>{contact.name}</td>
                             <td>{Number(contact.popularity).toFixed(2)}</td>
-                            <td>{contact.wonOscar && "🏆"}</td>
-                            <td>{contact.wonEmmy && "🏆"}</td>
+                            <td className="cup">{contact.wonOscar && "🏆"}</td>
+                            <td className="cup">{contact.wonEmmy && "🏆"}</td>
+                            <td>
+                                <button onClick={deleteContact(contact.id)}>
+                                    <i className="fa-solid fa-trash-can"></i>
+                                </button>
+                            </td>
                         </tr>
                     ))}
                 </tbody>
