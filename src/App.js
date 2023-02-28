@@ -4,6 +4,7 @@ import contactDB from "./contacts.json";
 
 function App() {
     const [contacts, setContacts] = useState(contactDB.slice(0, 5));
+
     const addRandomContact = () => {
         setContacts((contactList) => {
             const filteredCelebs = contactDB.filter(
@@ -13,10 +14,15 @@ function App() {
             return [...contactList, filteredCelebs[randomNum]];
         });
     };
+    const sortByPopularity
     return (
         <div className="App">
-            <button onClick={addRandomContact}>Add Random Contact</button>
             <h1>IronContacts</h1>
+            <div className="control-bar">
+                <button onClick={addRandomContact}>Add Random Contact</button>
+                <button onClick={SortByName}>Sort by Name</button>
+                <button onClick={SortByPopularity}>Sort by Popularity</button>
+            </div>
             <table className="ContactList">
                 <thead>
                     <tr>
