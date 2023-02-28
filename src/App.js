@@ -11,6 +11,8 @@ function ContactList(props) {
                     <th>Picture</th>
                     <th>Name</th>
                     <th>Popularity</th>
+                    <th>Oscar</th>
+                    <th>Emmy</th>
                 </tr>
             </thead>
             <tbody>
@@ -22,6 +24,8 @@ function ContactList(props) {
                             </td>
                             <td>{contact.name}</td>
                             <td>{Number(contact.popularity).toFixed(2)}</td>
+                            <td>{contact.wonOscar && "🏆"}</td>
+                            <td>{contact.wonEmmy && "🏆"}</td>
                         </tr>
                     );
                 })}
