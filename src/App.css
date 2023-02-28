@@ -36,3 +36,18 @@
     transform: rotate(360deg);
   }
 }
+
+.ContactList {
+  font-size: 1.2rem;
+  margin: 0 auto;
+}
+
+.ContactList thead {
+  font-weight: 600;
+  font-size: 1.3em;
+}
+
+.ContactList img {
+  height: 100px;
+  width: auto;
+}
