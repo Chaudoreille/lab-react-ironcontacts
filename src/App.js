@@ -2,23 +2,34 @@ import { useState } from "react";
 import "./App.css";
 import contactDB from "./contacts.json";
 
-function ContactList(props) {
-    const { contacts, setContacts } = { ...props };
+function App() {
+    const [contacts, setContacts] = useState(contactDB.slice(0, 5));
+    const addRandomContact = () => {
+        setContacts((contactList) => {
+            const filteredCelebs = contactDB.filter(
+                (celeb) => contactList.indexOf(celeb) === -1
+            );
+            const randomNum = Math.floor(Math.random() * filteredCelebs.length);
+            return [...contactList, filteredCelebs[randomNum]];
+        });
+    };
     return (
-        <table className="ContactList">
-            <thead>
-                <tr>
-                    <th>Picture</th>
-                    <th>Name</th>
-                    <th>Popularity</th>
-                    <th>Oscar</th>
-                    <th>Emmy</th>
-                </tr>
-            </thead>
-            <tbody>
-                {contacts.map((contact) => {
-                    return (
-                        <tr>
+        <div className="App">
+            <button onClick={addRandomContact}>Add Random Contact</button>
+            <h1>IronContacts</h1>
+            <table className="ContactList">
+                <thead>
+                    <tr>
+                        <th>Picture</th>
+                        <th>Name</th>
+                        <th>Popularity</th>
+                        <th>Oscar</th>
+                        <th>Emmy</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {contacts.map((contact) => (
+                        <tr key={contact.id}>
                             <td>
                                 <img src={contact.pictureUrl} alt="" />
                             </td>
@@ -27,19 +38,9 @@ function ContactList(props) {
                             <td>{contact.wonOscar && "🏆"}</td>
                             <td>{contact.wonEmmy && "🏆"}</td>
                         </tr>
-                    );
-                })}
-            </tbody>
-        </table>
-    );
-}
-
-function App() {
-    const [contacts, setContacts] = useState(contactDB.slice(0, 5));
-    return (
-        <div className="App">
-            <h1>IronContacts</h1>
-            <ContactList contacts={contacts} setContacts={setContacts} />
+                    ))}
+                </tbody>
+            </table>
         </div>
     );
 }
